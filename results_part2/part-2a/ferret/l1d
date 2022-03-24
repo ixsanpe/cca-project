@@ -1,0 +1,14 @@
+(256,255)
+(256,256)
+QUERY TIME: 13.017 seconds
+
+real	0m13.222s
+user	0m23.711s
+sys	0m0.302s
+[PARSEC] [----------    End of output    ----------]
+[PARSEC]
+[PARSEC] BIBLIOGRAPHY
+[PARSEC]
+[PARSEC] [1] Bienia. Benchmarking Modern Multiprocessors. Ph.D. Thesis, 2011.
+[PARSEC]
+[PARSEC] Done.
