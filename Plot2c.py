@@ -49,10 +49,15 @@ plt.plot(labels, canneal_n, label = "canneal", marker='.')
 plt.plot(labels, dedup_n, label = "dedup", marker='D')
 plt.plot(labels, ferret_n, label = "ferret", marker='P')
 plt.plot(labels, freqmine_n, label = "freqmine", marker='v')
-plt.legend()
+
+handles, labels = plt.gca().get_legend_handles_labels()
+order = [4,3,0,1,2]
+plt.legend([handles[idx] for idx in order],[labels[idx] for idx in order], fontsize=10, title="Application:") 
+
+#plt.legend()
 plt.xlabel("No. Cores")
 plt.ylabel("Speedup (Normalized to single core performance)")
-plt.xticks(range(12))
+plt.xticks(range(13))
 plt.yticks([0, 0.5 ,1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5])
 plt.title('Scalability of Parsec Benchmarks')
 plt.grid(ls='--')
