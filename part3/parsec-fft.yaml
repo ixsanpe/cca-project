@@ -10,9 +10,12 @@ spec:
       containers:
       - image: anakli/parsec:simlarge
         name: parsec-splash2x-fft
+ 	  resources: 
+          limits: 
+            cpu: "2"
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "./bin/parsecmgmt -a run -p splash2x.fft -i simlarge -n 1"]
+        args: ["-c", "taskset -c 6-7 ./bin/parsecmgmt -a run -p splash2x.fft -i simlarge -n 2"]
       restartPolicy: Never
       nodeSelector:
-        cca-project-nodetype: "parsec"
+        cca-project-nodetype: "node-c-8core"

@@ -10,9 +10,12 @@ spec:
       containers:
       - image: anakli/parsec:simlarge
         name: parsecfreqmine
+ 	  resources: 
+          limits: 
+            cpu: "6"
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "./bin/parsecmgmt -a run -p freqmine -i simlarge -n 1"]
+        args: ["-c", "taskset -c 0-5 ./bin/parsecmgmt -a run -p freqmine -i simlarge -n 6"]
       restartPolicy: Never
       nodeSelector:
-        cca-project-nodetype: "parsec"
+        cca-project-nodetype: "node-c-8core"

@@ -13,7 +13,7 @@ spec:
   cloudConfig:
     gceServiceAccount: default
   cloudProvider: gce
-  configBase: gs://cca-eth-2022-group-25-2-lheath
+  configBase: gs://cca-eth-2022-group-25-2-isanchez
   containerRuntime: docker
   etcdClusters:
   - cpuRequest: 200m
