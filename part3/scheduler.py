@@ -1,33 +1,6 @@
 import subprocess
 import json
 
-'''
-This code is broken. job-name key can causes exceptions occasionally.
-'''
-
-
-def get_jobs():
-    filename = "jobs.json"
-    command = f"kubectl get pods -o json > {filename}"
-    subprocess.call(command, shell=True)
-    file = open(filename, 'r')
-    json_file = json.load(file)
-
-    jobs = []
-    for item in json_file['items']:
-        name = str(item['metadata']['labels']['job-name'])
-        if name != "memcached":
-            jobs.append(name)
-
-    file.close()
-    # TODO: Delete file
-
-    return jobs
-
-
-'''
-Delete the parsec jobs.
-'''
 
 
 def delete_jobs():
@@ -43,19 +16,11 @@ def delete_jobs():
         print(f"Deleting job {job}")
         subprocess.run(deleteJobsStatement.format(job).split(" "))
 
-
-'''
-This code statically schedules the 6 parsec benchmarks dedup, blackscholes,
-ferret, freqmine, canneal and fft while ensuring the memcached SLAs of 2ms < response times
-at 30k QPS for 95% of all requests.
-This code should be run in the top most folder of the project or the location variable for the parsec benchmarks
-should be updated appropriately.
-'''
 # Clean up - Delete any parsec jobs before starting execution
 delete_jobs()
 
 # Schedule jobs
-location = "C:/Users/ixsan/Documents\ETH/0Courses ETH/SS2022/CloudComputing/measures/part3"
+location = ""
 
 vm8jobs = ["parsec-freqmine.yaml", "parsec-fft.yaml", "parsec-canneal.yaml", "parsec-blackscholes.yaml"]
 vm4jobs = ["parsec-ferret.yaml", "parsec-dedup.yaml"]

@@ -11,7 +11,7 @@ spec:
       - image: anakli/parsec:simlarge
         name: parsecferret
         imagePullPolicy: Always
-        command: ["/bin/sh"]
+        command : ["/bin/sh"]
         args: ["-c", "taskset -c 0-3 ./bin/parsecmgmt -a run -p ferret -i simlarge -n 4"]
       restartPolicy: Never
       nodeSelector:

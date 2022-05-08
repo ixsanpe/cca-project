@@ -10,7 +10,7 @@ spec:
       containers:
       - image: anakli/parsec:blackscholes-native-reduced
         name: parsecblackscholes
-	  resources: 
+        resources: 
           limits: 
             cpu: "5"
         imagePullPolicy: Always

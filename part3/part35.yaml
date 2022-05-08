@@ -2,7 +2,7 @@ apiVersion: kops.k8s.io/v1alpha2
 kind: Cluster
 metadata:
   creationTimestamp: null
-  name: part3.k8s.local
+  name: part35.k8s.local
 spec:
   api:
     loadBalancer:
@@ -13,7 +13,7 @@ spec:
   cloudConfig:
     gceServiceAccount: default
   cloudProvider: gce
-  configBase: gs://cca-eth-2022-group-25-2-isanchez
+  configBase: gs://cca-eth-2022-group-25-2-lheath/part35.k8s.local
   containerRuntime: docker
   etcdClusters:
   - cpuRequest: 200m
@@ -36,7 +36,7 @@ spec:
   kubernetesApiAccess:
   - 0.0.0.0/0
   kubernetesVersion: 1.19.7
-  masterPublicName: api.part3.k8s.local
+  masterPublicName: api.part35.k8s.local
   networking:
     kubenet: {}
   nonMasqueradeCIDR: 100.64.0.0/10
@@ -60,7 +60,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: master-europe-west3-a
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -83,7 +83,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: client-measure
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -106,7 +106,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: client-agent-a
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -130,7 +130,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: client-agent-b
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -153,7 +153,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: node-a-2core
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -176,7 +176,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: node-b-4core
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
@@ -199,7 +199,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
-    kops.k8s.io/cluster: part3.k8s.local
+    kops.k8s.io/cluster: part35.k8s.local
   name: node-c-8core
 spec:
   image: ubuntu-os-cloud/ubuntu-1804-bionic-v20210211
