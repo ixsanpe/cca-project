@@ -8,7 +8,7 @@ spec:
   template:
     spec:
       containers:
-      - image: anakli/parsec:simlarge
+      - image: anakli/parsec:freqmine-native-reduced
         name: parsecfreqmine
         resources:
           limits: 

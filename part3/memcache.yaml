@@ -14,4 +14,3 @@ spec:
   nodeSelector:
     cca-project-nodetype: "node-a-2core"
 
-

@@ -8,7 +8,7 @@ spec:
   template:
     spec:
       containers:
-      - image: anakli/parsec:simlarge
+      - image: anakli/parsec:splash2x-fft-native-reduced
         name: parsec-splash2x-fft
         resources: 
           limits: 
