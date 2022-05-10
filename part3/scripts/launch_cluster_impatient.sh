@@ -1,4 +1,4 @@
-export KOPS_STATE_STORE=gs://cca-eth-2022-group-25-impatient-lheath/
+export KOPS_STATE_STORE=gs://cca-eth-2022-group-25-impatient-lheath-2/
 export KOPS_FEATURE_FLAGS=AlphaAllowGCE
 PROJECT=`gcloud config get-value project`
 kops create -f ../part_3_impatient.yaml

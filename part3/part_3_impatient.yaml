@@ -13,7 +13,7 @@ spec:
   cloudConfig:
     gceServiceAccount: default
   cloudProvider: gce
-  configBase: gs://cca-eth-2022-group-25-impatient-lheath/part3i.k8s.local
+  configBase: gs://cca-eth-2022-group-25-impatient-lheath-2/part3i.k8s.local
   containerRuntime: docker
   etcdClusters:
   - cpuRequest: 200m
@@ -40,7 +40,7 @@ spec:
   networking:
     kubenet: {}
   nonMasqueradeCIDR: 100.64.0.0/10
-  project: cca-louis-impatient
+  project: cca-group25-personal
   sshAccess:
   - 0.0.0.0/0
   subnets:
