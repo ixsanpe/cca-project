@@ -1,0 +1,54 @@
+cd '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part3'
+
+# gcloud init: maybe you have to autenthicate yourself again
+# gcloud auth application-default login
+# replace \r in notepad++
+
+bash scripts/ixeia/deploy.sh
+	*if we change project -> check it!
+
+# get info we need later:
+kubectl get nodes -o wide
+a=agent-a-XXX
+b=agent-b-XXX
+m=measure-XXX
+a_i_IP = INTERNAL-IP-a (10.156.15.193)
+b_i_IP = INTERNAL-IP-b (10.156.15.192)
+
+# connect to the 3 VMs: 
+
+bash scripts/ixeia/commands_ssh.sh $a < scripts/ixeia/install_mcperf.sh
+
+bash scripts/ixeia/commands_ssh.sh $b < scripts/ixeia/install_mcperf.sh
+
+bash scripts/ixeia/commands_ssh.sh $m < scripts/ixeia/install_mcperf.sh
+
+# install memcache.yaml
+
+bash scripts/ixeia/install_memcache.sh
+
+kubectl get pods -o wide
+
+# save the IP memcache
+mem_IP = MEMCACHED_IP
+
+# connect to VM client-agent-a:
+
+bash scripts/ixeia/commands_ssh.sh $a < scripts/ixeia/mcperf_a.sh
+
+# connect to VM client-agent-b:
+
+bash scripts/ixeia/commands_ssh.sh $a < scripts/ixeia/mcperf_b.sh
+
+# connect to VM client-measure:
+
+kubectl get pods -o wide
+kubectl get nodes -o wide
+bash scripts/ixeia/commands_ssh.sh $m 
+
+-> Inside run manually these:
+
+cd memcache-perf
+./mcperf -s MEMCACHED_IP --loadonly
+./mcperf -s MEMCACHED_IP -a INTERNAL_A_IP -a INTERNAL_B_IP --noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 20 --scan 30000:30500:10
+

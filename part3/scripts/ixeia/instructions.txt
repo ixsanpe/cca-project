@@ -1,0 +1,83 @@
+#Remove cluster:
+#-> delete VM groups and ...
+#-> write:
+C:\Users\ixsan\kops.exe delete cluster part3.k8s.local --yes
+gsutil del -r gs://cca-eth-2022-group-25-2-isanchez/
+
+
+# 1. Deploy cluster:
+gsutil mb gs://cca-eth-2022-group-25-2-isanchez/
+cd C:\Users\ixsan\Documents\ETH\0Courses ETH\SS2022\CloudComputing\measures\part3
+C:\Users\ixsan\kops.exe create -f part3.yaml
+C:\Users\ixsan\kops.exe update cluster --name part3.k8s.local --yes --admin
+C:\Users\ixsan\kops.exe validate cluster --wait 10m
+
+C:\Users\ixsan\kubectl get nodes 
+
+# 2. Connect to client measure and client: 
+kubectl get nodes -o wide
+
+### $CLIENT_AGENTa, $CLIENT_AGENTb, $CLIENT_MEASURE
+client-agent-a-n13t 
+client-agent-b-45gl
+client-measure-8x8s
+
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-measure-8x8s --zone europe-west3-a
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-a-n13t --zone europe-west3-a
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-b-45gl --zone europe-west3-a <C:\Users\ixsan\Documents\ETH\0Courses ETH\SS2022\CloudComputing\measures\part3\scripts\install_mcperf.sh
+
+---------------- NO WORK
+	scripts/connect.sh client-measure-8x8s
+ 	<install_scripts/mcperf.sh
+	set $1=client-measure-x1xw
+	gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$1 --zone europe-west3-a
+---------------------
+
+
+# 3. Install load generator in client measure, client agent a and client agent b: 
+
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install libevent-dev libzmq3-dev git make g++ --yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list~
+sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get build-dep memcached --yes
+cd && git clone https://github.com/shaygalon/memcache-perf.git
+cd memcache-perf
+make
+
+
+# 4. Install memcached normal cmd:
+
+cd C:\Users\ixsan\Documents\ETH\0Courses ETH\SS2022\CloudComputing\measures\part3
+kubectl create -f memcache.yaml
+kubectl expose pod some-memcached --name some-memcached-11211 --type LoadBalancer --port 11211 --protocol TCP
+timeout 60
+kubectl get service some-memcached-11211
+kubectl get pods -o wide
+
+### $MEMCACHED_IP = ***above IP
+
+IP = 100.96.5.4
+
+# 5. client agent a
+
+./mcperf -T 2 -A
+
+# 6. client agent b
+
+./mcperf -T 4 -A
+
+# 7. client-measure VM:
+
+$ ./mcperf -s 100.96.5.4 --loadonly
+$ ./mcperf -s 100.96.5.4 -a 10.156.0.61 -a 10.156.0.58 --noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 20 --scan 30000:30500:10
+
+# 8. create kubectl:
+kubectl create -f parsec-dedup.yaml
+kubectl create -f parsec-ferret.yaml
+kubectl create -f parsec-blacksholes.yaml
+kubectl create -f parsec-fft.yaml
+kubectl create -f parsec-canneal.yaml
+kubectl create -f parsec-freqmine.yaml
