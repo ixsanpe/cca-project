@@ -10,6 +10,9 @@ spec:
       containers:
       - image: anakli/parsec:ferret-native-reduced
         name: parsecferret
+        resources: 
+          limits: 
+            cpu: "4"
         imagePullPolicy: Always
         command : ["/bin/sh"]
         args: ["-c", "taskset -c 0-3 ./bin/parsecmgmt -a run -p ferret -i native -n 4"]
