@@ -38,9 +38,8 @@ do
     if [ "$ferret" == "$complete" ]; then
         kubectl create -f parsec-dedup.yaml
     fi
-    # Check for FFT ---> BlackScholes
-	#if [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ]; then
-	if [ "$fft"=="$complete" ]; then
+    # Check for FFT ---> BlackScholes	#if [ "$freqmine" == "$complete" ] && [ "$fft" == "$complete" ]; then
+    if [ "$freqmine" == "$complete" ]; then
         kubectl create -f parsec-blackscholes.yaml
     fi
     # Check for Freqmine ---> Canneal
@@ -48,15 +47,12 @@ do
         kubectl create -f parsec-canneal.yaml
     fi
 	
-	if [ "$ferret" == "$complete" ] && [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ] && [ "$canneal"=="$complete" ] && [ "$dedup"=="$complete" ] && [ "$blackscholes"=="$complete" ]; then
-		#kubectl get pods -o json > resultsNew.json
-		#python3 get_time.py resultsNew.json
+    if [ "$ferret" == "$complete" ] && [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ] && [ "$canneal"=="$complete" ] && [ "$dedup"=="$complete" ] && [ "$blackscholes"=="$complete" ]; then
+		kubectl get pods -o json > results1.json
+		python3 get_time.py results1.json
 		break
 	fi
-    # TODO: If all jobs completed/ran, quit
-        # Or just wait a bit and kill the script with ctrl-c idk
 
-	# TODO: Is this parameter good? Should it be smaller to improve efficiency?
 	sleep 1
 	
 done 

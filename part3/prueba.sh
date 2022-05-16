@@ -1,10 +1,11 @@
 #! /bin/bash
 
 
-ferret=`kubectl get jobs -o wide | grep parsec-ferret | awk '{print $2}'`
+ferret=`kubectl get pods -o wide | grep parsec-freqmine | awk '{print $3}'`
 incomplete="0/1"
-complete="1/1"
-
-if [ "$ferret" == "$incomplete" ]; then
+complete="Completed"
+#echo $ferret
+#echo $complete
+if [ "$ferret" == "$complete" ]; then
 	echo $ferret
 fi 

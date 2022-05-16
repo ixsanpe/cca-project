@@ -1,5 +1,5 @@
-#gsutil mb gs://cca-eth-2022-group-25-2-isanchez/
-#bash scripts/ixeia/deploy.sh
+gsutil mb gs://cca-eth-2022-group-25-2-isanchez/
+bash scripts/ixeia/deploy.sh
 
 # get info we need later:
 a=`kubectl get nodes | grep client-agent-a | awk '{print $1}'`
