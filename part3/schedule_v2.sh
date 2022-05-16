@@ -11,15 +11,13 @@ kubectl delete jobs --field-selector status.successful=0
 #   Freqmine ---> Canneal
 
 # Run initial jobs: Ferret, FFT, Freqmine
-
-#TODO: Are these commands correct? Were we running with any extra parameters?
 kubectl create -f parsec-freqmine.yaml
 kubectl create -f parsec-ferret.yaml
 kubectl create -f parsec-fft.yaml
 
 
 # At Each tick
-while :
+while true
 do
     # For each dependency check if job completed
 
@@ -27,23 +25,38 @@ do
     kubectl get jobs -o wide > temporary_file.raw
 	
 	ferret=`kubectl get jobs -o wide | grep parsec-ferret | awk '{print $2}'`
+	freqmine=`kubectl get jobs -o wide | grep parsec-freqmine | awk '{print $2}'`
+	fft=`kubectl get jobs -o wide | grep parsec-splash2x-fft | awk '{print $2}'`
+	blackscholes=`kubectl get jobs -o wide | grep parsec-blackscholes | awk '{print $2}'`
+	dedup=`kubectl get jobs -o wide | grep parsec-dedup | awk '{print $2}'`
+	canneal=`kubectl get jobs -o wide | grep parsec-canneal | awk '{print $2}'`
 	
+	incomplete="0/1"
+	complete="1/1"
+
     # Check for Ferret ---> Dedup
-    if grep temporary_file --quiet <TODO: Regular expression that matches the job completed line>; then
+    if [ "$ferret" == "$complete" ]; then
         kubectl create -f parsec-dedup.yaml
     fi
     # Check for FFT ---> BlackScholes
-    if grep temporary_file --quiet <TODO: Regular expression that matches the job completed line>; then
+	#if [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ]; then
+	if [ "$fft"=="$complete" ]; then
         kubectl create -f parsec-blackscholes.yaml
     fi
     # Check for Freqmine ---> Canneal
-    if grep temporary_file --quiet <TODO: Regular expression that matches the job completed line>; then
+    if [ "$freqmine" == "$complete" ]; then
         kubectl create -f parsec-canneal.yaml
     fi
-
+	
+	if [ "$ferret" == "$complete" ] && [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ] && [ "$canneal"=="$complete" ] && [ "$dedup"=="$complete" ] && [ "$blackscholes"=="$complete" ]; then
+		#kubectl get pods -o json > resultsNew.json
+		#python3 get_time.py resultsNew.json
+		break
+	fi
     # TODO: If all jobs completed/ran, quit
         # Or just wait a bit and kill the script with ctrl-c idk
 
 	# TODO: Is this parameter good? Should it be smaller to improve efficiency?
 	sleep 1
-done
+	
+done 

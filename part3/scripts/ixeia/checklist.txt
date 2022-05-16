@@ -1,8 +1,24 @@
 cd '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part3'
 
+-----------------------------------------------------------
+# Delete target pools (https://moodle-app2.let.ethz.ch/mod/forum/search.php?id=16788&words=load+balancer&phrase=&notwords=&fullwords=&hfromday=1&hfrommonth=1&hfromyear=1&hfromhour=1&hfromminute=1&htoday=1&htomonth=1&htoyear=1&htohour=1&htominute=1&forumid=&subject=&user=)
+
+gcloud compute target-pools delete $(gcloud compute target-pools list | grep west3 | cut -d " " -f 1)
+
+# Delete cluster:
+kops delete cluster part3.k8s.local --yes
+gsutil rm -r gs://cca-eth-2022-group-25-2-isanchez/
+
+
+
+-----------------------------------------------------------
+Part 3:
+
 # gcloud init: maybe you have to autenthicate yourself again
 # gcloud auth application-default login
 # replace \r in notepad++
+
+gsutil mb gs://cca-eth-2022-group-25-2-isanchez/
 
 bash scripts/ixeia/deploy.sh
 	*if we change project -> check it!
@@ -14,6 +30,13 @@ b=agent-b-XXX
 m=measure-XXX
 a_i_IP = INTERNAL-IP-a (10.156.15.193)
 b_i_IP = INTERNAL-IP-b (10.156.15.192)
+
+a=`kubectl get nodes | grep client-agent-a | awk '{print $1}'`
+b=`kubectl get nodes | grep client-agent-b | awk '{print $1}'`
+m=`kubectl get nodes | grep client-measure | awk '{print $1}'`
+
+AGENT_A_INTERNAL_IP=`kubectl get nodes -o wide | grep client-agent-a | awk '{print $6}'`
+AGENT_B_INTERNAL_IP=`kubectl get nodes -o wide | grep client-agent-b | awk '{print $6}'`
 
 # connect to the 3 VMs: 
 
@@ -32,13 +55,14 @@ kubectl get pods -o wide
 # save the IP memcache
 mem_IP = MEMCACHED_IP
 
+# Open different ubuntu apps to do this and copy variable $a
 # connect to VM client-agent-a:
 
 bash scripts/ixeia/commands_ssh.sh $a < scripts/ixeia/mcperf_a.sh
 
 # connect to VM client-agent-b:
 
-bash scripts/ixeia/commands_ssh.sh $a < scripts/ixeia/mcperf_b.sh
+bash scripts/ixeia/commands_ssh.sh $b < scripts/ixeia/mcperf_b.sh
 
 # connect to VM client-measure:
 
@@ -46,9 +70,23 @@ kubectl get pods -o wide
 kubectl get nodes -o wide
 bash scripts/ixeia/commands_ssh.sh $m 
 
--> Inside run manually these:
+-> Inside run manually these and save variables:
+MEM_IP = 100.96.1.2
+I_A_IP = 10.156.15.202
+I_B_IP = 10.156.15.203
 
 cd memcache-perf
-./mcperf -s MEMCACHED_IP --loadonly
-./mcperf -s MEMCACHED_IP -a INTERNAL_A_IP -a INTERNAL_B_IP --noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 20 --scan 30000:30500:10
+./mcperf -s $MEM_IP --loadonly
+./mcperf -s $MEM_IP -a $I_A_IP -a $I_B_IP --noload -T 6 -C 4 -D 4 -Q 1000 -c 4 -t 20 --scan 30000:30500:10
+
+# in the normal one .../part3:
+
+python3 scheduler.py
+
+# (...)
+#check:
+
+kubectl get pods -o json > resultsIxe.json
+python3 get_time.py resultsIxe.json
+
 

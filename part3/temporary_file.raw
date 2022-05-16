@@ -1,0 +1,6 @@
+NAME                  COMPLETIONS   DURATION   AGE     CONTAINERS            IMAGES                                      SELECTOR
+parsec-blackscholes   1/1           3m31s      4m54s   parsecblackscholes    anakli/parsec:blackscholes-native-reduced   controller-uid=3dabe139-74e4-4910-a488-ac529c642354
+parsec-canneal        0/1           2m55s      2m55s   parseccanneal         anakli/parsec:canneal-native-reduced        controller-uid=96c5003b-bb8e-4f0f-898e-3e2798dcabc4
+parsec-ferret         1/1           4m55s      4m56s   parsecferret          anakli/parsec:ferret-native-reduced         controller-uid=8070d725-f7b6-4602-ac68-6c884cdbbd43
+parsec-freqmine       1/1           118s       4m56s   parsecfreqmine        anakli/parsec:freqmine-native-reduced       controller-uid=1b2ae09f-4231-4697-a2a0-f06ecfcac3f7
+parsec-splash2x-fft   1/1           4m6s       4m55s   parsec-splash2x-fft   anakli/parsec:splash2x-fft-native-reduced   controller-uid=4b42658b-fa49-4974-bf95-e1da40fea032

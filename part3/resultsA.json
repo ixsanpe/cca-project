@@ -5,10 +5,10 @@
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "creationTimestamp": "2022-05-16T15:53:53Z",
+                "creationTimestamp": "2022-05-16T17:09:26Z",
                 "generateName": "parsec-blackscholes-",
                 "labels": {
-                    "controller-uid": "5b6d0ba3-e2a9-4182-a9f6-032816473baa",
+                    "controller-uid": "8f4d4eaa-7c84-47c3-bc44-f25f5353fce9",
                     "job-name": "parsec-blackscholes"
                 },
                 "managedFields": [
@@ -25,7 +25,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"5b6d0ba3-e2a9-4182-a9f6-032816473baa\"}": {
+                                    "k:{\"uid\":\"8f4d4eaa-7c84-47c3-bc44-f25f5353fce9\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -74,30 +74,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
-                    },
-                    {
-                        "apiVersion": "v1",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:status": {
-                                "f:conditions": {
-                                    ".": {},
-                                    "k:{\"type\":\"PodScheduled\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    }
-                                }
-                            }
-                        },
-                        "manager": "kube-scheduler",
-                        "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:09:26Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -136,7 +113,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.6.15\"}": {
+                                    "k:{\"ip\":\"100.96.6.39\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -146,10 +123,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T16:01:06Z"
+                        "time": "2022-05-16T17:10:59Z"
                     }
                 ],
-                "name": "parsec-blackscholes-2vhkx",
+                "name": "parsec-blackscholes-bh26v",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -158,12 +135,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-blackscholes",
-                        "uid": "5b6d0ba3-e2a9-4182-a9f6-032816473baa"
+                        "uid": "8f4d4eaa-7c84-47c3-bc44-f25f5353fce9"
                     }
                 ],
-                "resourceVersion": "26818",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-blackscholes-2vhkx",
-                "uid": "918ef958-d3d1-467d-8fa1-ddece9d9d7d1"
+                "resourceVersion": "41194",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-blackscholes-bh26v",
+                "uid": "05db5d69-0d56-4c0b-887f-39aeeff477f3"
             },
             "spec": {
                 "containers": [
@@ -239,35 +216,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:31Z",
+                        "lastTransitionTime": "2022-05-16T17:09:26Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T16:01:06Z",
+                        "lastTransitionTime": "2022-05-16T17:10:59Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T16:01:06Z",
+                        "lastTransitionTime": "2022-05-16T17:10:59Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:31Z",
+                        "lastTransitionTime": "2022-05-16T17:09:26Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://8478f2f83a16d87ce0d68159847d55acb617dea461fc544283cf5c701994d4ff",
+                        "containerID": "docker://65e75b087baf61cfab7ac8ac5ed01a5aae8c570484cb261377c8dca72fbb2088",
                         "image": "anakli/parsec:blackscholes-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:09493daac822c3ba0889a5ae0aad6c6792aedf6b077d4352d103e2a0e3e50063",
                         "lastState": {},
@@ -277,35 +254,35 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://8478f2f83a16d87ce0d68159847d55acb617dea461fc544283cf5c701994d4ff",
+                                "containerID": "docker://65e75b087baf61cfab7ac8ac5ed01a5aae8c570484cb261377c8dca72fbb2088",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T16:01:04Z",
+                                "finishedAt": "2022-05-16T17:10:57Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:59:33Z"
+                                "startedAt": "2022-05-16T17:09:28Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.225",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.15",
+                "podIP": "100.96.6.39",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.15"
+                        "ip": "100.96.6.39"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:59:31Z"
+                "startTime": "2022-05-16T17:09:26Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "creationTimestamp": "2022-05-16T15:53:53Z",
+                "creationTimestamp": "2022-05-16T17:09:26Z",
                 "generateName": "parsec-canneal-",
                 "labels": {
-                    "controller-uid": "b3531fa0-0dba-4299-9242-c263d53144d3",
+                    "controller-uid": "7f7e210d-7d6b-468d-a54d-e00bdd110fd9",
                     "job-name": "parsec-canneal"
                 },
                 "managedFields": [
@@ -322,7 +299,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"b3531fa0-0dba-4299-9242-c263d53144d3\"}": {
+                                    "k:{\"uid\":\"7f7e210d-7d6b-468d-a54d-e00bdd110fd9\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -371,7 +348,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:09:26Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -394,7 +371,7 @@
                         },
                         "manager": "kube-scheduler",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:09:26Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -433,7 +410,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.6.14\"}": {
+                                    "k:{\"ip\":\"100.96.6.40\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -443,10 +420,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T15:59:31Z"
+                        "time": "2022-05-16T17:13:58Z"
                     }
                 ],
-                "name": "parsec-canneal-4n2bn",
+                "name": "parsec-canneal-zfxnn",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -455,12 +432,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-canneal",
-                        "uid": "b3531fa0-0dba-4299-9242-c263d53144d3"
+                        "uid": "7f7e210d-7d6b-468d-a54d-e00bdd110fd9"
                     }
                 ],
-                "resourceVersion": "26500",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-canneal-4n2bn",
-                "uid": "f7173802-b1e4-4c50-9d71-7cad0894821b"
+                "resourceVersion": "41790",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-canneal-zfxnn",
+                "uid": "435a2de3-61bb-4187-b25d-650169bcaacc"
             },
             "spec": {
                 "containers": [
@@ -536,35 +513,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:11:01Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:31Z",
+                        "lastTransitionTime": "2022-05-16T17:13:57Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:31Z",
+                        "lastTransitionTime": "2022-05-16T17:13:57Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:11:01Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://ce950a8471d12f1e78b439976c7fee2028557732d5060e2969d016cff15f099f",
+                        "containerID": "docker://127ff9a958be8b75bd4cd64cba3a87f36f2afbb43bb220d7c9b5daa4867685f8",
                         "image": "anakli/parsec:canneal-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:1fa2a7c6e4dd08b8636c4a56042f3f46679f0fdba28f69574524b2ebd54a8941",
                         "lastState": {},
@@ -574,25 +551,25 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://ce950a8471d12f1e78b439976c7fee2028557732d5060e2969d016cff15f099f",
+                                "containerID": "docker://127ff9a958be8b75bd4cd64cba3a87f36f2afbb43bb220d7c9b5daa4867685f8",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T15:59:30Z",
+                                "finishedAt": "2022-05-16T17:13:57Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:56:15Z"
+                                "startedAt": "2022-05-16T17:11:03Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.225",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.14",
+                "podIP": "100.96.6.40",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.14"
+                        "ip": "100.96.6.40"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:56:12Z"
+                "startTime": "2022-05-16T17:11:01Z"
             }
         },
         {
@@ -602,10 +579,10 @@
                 "annotations": {
                     "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsecdedup"
                 },
-                "creationTimestamp": "2022-05-16T15:53:54Z",
+                "creationTimestamp": "2022-05-16T17:10:53Z",
                 "generateName": "parsec-dedup-",
                 "labels": {
-                    "controller-uid": "08858a28-fafc-40f6-97ae-9adad870b559",
+                    "controller-uid": "8ed84bf4-a5b7-40d3-8615-f29d909726d6",
                     "job-name": "parsec-dedup"
                 },
                 "managedFields": [
@@ -622,7 +599,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"08858a28-fafc-40f6-97ae-9adad870b559\"}": {
+                                    "k:{\"uid\":\"8ed84bf4-a5b7-40d3-8615-f29d909726d6\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -661,7 +638,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:54Z"
+                        "time": "2022-05-16T17:10:53Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -700,7 +677,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.4.5\"}": {
+                                    "k:{\"ip\":\"100.96.4.20\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -710,10 +687,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T15:55:28Z"
+                        "time": "2022-05-16T17:11:29Z"
                     }
                 ],
-                "name": "parsec-dedup-nzg75",
+                "name": "parsec-dedup-7j7wd",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -722,12 +699,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-dedup",
-                        "uid": "08858a28-fafc-40f6-97ae-9adad870b559"
+                        "uid": "8ed84bf4-a5b7-40d3-8615-f29d909726d6"
                     }
                 ],
-                "resourceVersion": "25681",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-dedup-nzg75",
-                "uid": "d7aefc77-289c-49ad-9401-233e1f47eda5"
+                "resourceVersion": "41301",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-dedup-7j7wd",
+                "uid": "e8a87ace-02e1-46fd-9153-38c12c758b72"
             },
             "spec": {
                 "containers": [
@@ -800,35 +777,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:53:54Z",
+                        "lastTransitionTime": "2022-05-16T17:10:53Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:55:28Z",
+                        "lastTransitionTime": "2022-05-16T17:11:29Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:55:28Z",
+                        "lastTransitionTime": "2022-05-16T17:11:29Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:53:54Z",
+                        "lastTransitionTime": "2022-05-16T17:10:53Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://3bedee7799221bdf35bad4f1778fd2f67d9da3df4819996841ff4fa5c26269d2",
+                        "containerID": "docker://daf6dd0599775e54c409af0d7948e610bf4073b24cdbd462ee07c39caf3a96d4",
                         "image": "anakli/parsec:dedup-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:b61aef773919dce3e24284af9e052f3bdddcf1ed4b4e00961ff9ee0b08131e5d",
                         "lastState": {},
@@ -838,25 +815,25 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://3bedee7799221bdf35bad4f1778fd2f67d9da3df4819996841ff4fa5c26269d2",
+                                "containerID": "docker://daf6dd0599775e54c409af0d7948e610bf4073b24cdbd462ee07c39caf3a96d4",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T15:55:25Z",
+                                "finishedAt": "2022-05-16T17:11:17Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:53:58Z"
+                                "startedAt": "2022-05-16T17:10:55Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.223",
                 "phase": "Succeeded",
-                "podIP": "100.96.4.5",
+                "podIP": "100.96.4.20",
                 "podIPs": [
                     {
-                        "ip": "100.96.4.5"
+                        "ip": "100.96.4.20"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:53:54Z"
+                "startTime": "2022-05-16T17:10:53Z"
             }
         },
         {
@@ -866,10 +843,10 @@
                 "annotations": {
                     "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container parsecferret"
                 },
-                "creationTimestamp": "2022-05-16T15:53:53Z",
+                "creationTimestamp": "2022-05-16T17:05:43Z",
                 "generateName": "parsec-ferret-",
                 "labels": {
-                    "controller-uid": "bdc57481-4bb8-485a-a604-7e655813d8c8",
+                    "controller-uid": "2cd9806c-125e-431d-aa02-3e88a5e789c5",
                     "job-name": "parsec-ferret"
                 },
                 "managedFields": [
@@ -886,7 +863,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"bdc57481-4bb8-485a-a604-7e655813d8c8\"}": {
+                                    "k:{\"uid\":\"2cd9806c-125e-431d-aa02-3e88a5e789c5\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -925,7 +902,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:05:43Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -964,7 +941,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.4.4\"}": {
+                                    "k:{\"ip\":\"100.96.4.19\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -974,10 +951,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T15:59:14Z"
+                        "time": "2022-05-16T17:10:52Z"
                     }
                 ],
-                "name": "parsec-ferret-m7gkt",
+                "name": "parsec-ferret-lk6kh",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -986,12 +963,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-ferret",
-                        "uid": "bdc57481-4bb8-485a-a604-7e655813d8c8"
+                        "uid": "2cd9806c-125e-431d-aa02-3e88a5e789c5"
                     }
                 ],
-                "resourceVersion": "26446",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-ferret-m7gkt",
-                "uid": "ac96f88c-6ffb-4668-a57b-ffd33c664547"
+                "resourceVersion": "41162",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-ferret-lk6kh",
+                "uid": "ecb80024-c98d-434d-9515-af8691a6ada9"
             },
             "spec": {
                 "containers": [
@@ -1064,35 +1041,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:53:54Z",
+                        "lastTransitionTime": "2022-05-16T17:05:43Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:14Z",
+                        "lastTransitionTime": "2022-05-16T17:10:52Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:59:14Z",
+                        "lastTransitionTime": "2022-05-16T17:10:52Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:53:53Z",
+                        "lastTransitionTime": "2022-05-16T17:05:43Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://3967beb58814cc130e784a86f3ff9e8c2f0dcddb4b6ee6390da94df0f072e4fb",
+                        "containerID": "docker://ca6459a722bb7f9c61f8f9a971a0e76d2b5fa3d28881091577f3d48ac1a9502a",
                         "image": "anakli/parsec:ferret-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:9328e510def0b53cca272134901b0147b7895d029d37d99c7aba66d172d3050c",
                         "lastState": {},
@@ -1102,35 +1079,35 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://3967beb58814cc130e784a86f3ff9e8c2f0dcddb4b6ee6390da94df0f072e4fb",
+                                "containerID": "docker://ca6459a722bb7f9c61f8f9a971a0e76d2b5fa3d28881091577f3d48ac1a9502a",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T15:59:13Z",
+                                "finishedAt": "2022-05-16T17:10:51Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:53:57Z"
+                                "startedAt": "2022-05-16T17:05:45Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.223",
                 "phase": "Succeeded",
-                "podIP": "100.96.4.4",
+                "podIP": "100.96.4.19",
                 "podIPs": [
                     {
-                        "ip": "100.96.4.4"
+                        "ip": "100.96.4.19"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:53:54Z"
+                "startTime": "2022-05-16T17:05:43Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "creationTimestamp": "2022-05-16T15:53:53Z",
+                "creationTimestamp": "2022-05-16T17:05:42Z",
                 "generateName": "parsec-freqmine-",
                 "labels": {
-                    "controller-uid": "a1f7a3cb-43a5-496d-ad57-67349911ecee",
+                    "controller-uid": "539153d8-91d3-48f7-a9fa-290e4a7506da",
                     "job-name": "parsec-freqmine"
                 },
                 "managedFields": [
@@ -1147,7 +1124,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"a1f7a3cb-43a5-496d-ad57-67349911ecee\"}": {
+                                    "k:{\"uid\":\"539153d8-91d3-48f7-a9fa-290e4a7506da\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -1196,7 +1173,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:05:42Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -1219,7 +1196,7 @@
                         },
                         "manager": "kube-scheduler",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:05:42Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -1258,7 +1235,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.6.12\"}": {
+                                    "k:{\"ip\":\"100.96.6.38\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -1268,10 +1245,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T15:56:12Z"
+                        "time": "2022-05-16T17:09:24Z"
                     }
                 ],
-                "name": "parsec-freqmine-cjphm",
+                "name": "parsec-freqmine-zkqvs",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -1280,12 +1257,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-freqmine",
-                        "uid": "a1f7a3cb-43a5-496d-ad57-67349911ecee"
+                        "uid": "539153d8-91d3-48f7-a9fa-290e4a7506da"
                     }
                 ],
-                "resourceVersion": "25827",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-freqmine-cjphm",
-                "uid": "903dc2db-4ab3-4043-a6f8-abaea4d89021"
+                "resourceVersion": "40862",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-freqmine-zkqvs",
+                "uid": "f4d1b530-d932-4947-b43e-3edaf0561340"
             },
             "spec": {
                 "containers": [
@@ -1361,35 +1338,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:54:15Z",
+                        "lastTransitionTime": "2022-05-16T17:07:27Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:09:24Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:09:24Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:54:15Z",
+                        "lastTransitionTime": "2022-05-16T17:07:27Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://c848ddc5f0dee48fea1a1df6066d1e809e56d4699371311817df95af0f3d2be1",
+                        "containerID": "docker://cdb881f0fdcc1a6ab3ecf85523aefa770f49ae49b8ce94d261c724fedee9f45a",
                         "image": "anakli/parsec:freqmine-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:0bfc97728dbec5b85b0436a164c824a0bbe0105428e4423dd03b7408f14c7d6b",
                         "lastState": {},
@@ -1399,35 +1376,35 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://c848ddc5f0dee48fea1a1df6066d1e809e56d4699371311817df95af0f3d2be1",
+                                "containerID": "docker://cdb881f0fdcc1a6ab3ecf85523aefa770f49ae49b8ce94d261c724fedee9f45a",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T15:56:11Z",
+                                "finishedAt": "2022-05-16T17:09:23Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:54:17Z"
+                                "startedAt": "2022-05-16T17:07:30Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.225",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.12",
+                "podIP": "100.96.6.38",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.12"
+                        "ip": "100.96.6.38"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:54:15Z"
+                "startTime": "2022-05-16T17:07:27Z"
             }
         },
         {
             "apiVersion": "v1",
             "kind": "Pod",
             "metadata": {
-                "creationTimestamp": "2022-05-16T15:53:53Z",
+                "creationTimestamp": "2022-05-16T17:05:43Z",
                 "generateName": "parsec-splash2x-fft-",
                 "labels": {
-                    "controller-uid": "2d4f1e29-371d-4197-9cdf-e4517117f1be",
+                    "controller-uid": "95a16b51-0432-48b3-92ba-dde3e90cd8f6",
                     "job-name": "parsec-splash2x-fft"
                 },
                 "managedFields": [
@@ -1444,7 +1421,7 @@
                                 },
                                 "f:ownerReferences": {
                                     ".": {},
-                                    "k:{\"uid\":\"2d4f1e29-371d-4197-9cdf-e4517117f1be\"}": {
+                                    "k:{\"uid\":\"95a16b51-0432-48b3-92ba-dde3e90cd8f6\"}": {
                                         ".": {},
                                         "f:apiVersion": {},
                                         "f:blockOwnerDeletion": {},
@@ -1493,30 +1470,7 @@
                         },
                         "manager": "kube-controller-manager",
                         "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
-                    },
-                    {
-                        "apiVersion": "v1",
-                        "fieldsType": "FieldsV1",
-                        "fieldsV1": {
-                            "f:status": {
-                                "f:conditions": {
-                                    ".": {},
-                                    "k:{\"type\":\"PodScheduled\"}": {
-                                        ".": {},
-                                        "f:lastProbeTime": {},
-                                        "f:lastTransitionTime": {},
-                                        "f:message": {},
-                                        "f:reason": {},
-                                        "f:status": {},
-                                        "f:type": {}
-                                    }
-                                }
-                            }
-                        },
-                        "manager": "kube-scheduler",
-                        "operation": "Update",
-                        "time": "2022-05-16T15:53:53Z"
+                        "time": "2022-05-16T17:05:43Z"
                     },
                     {
                         "apiVersion": "v1",
@@ -1555,7 +1509,7 @@
                                 "f:podIP": {},
                                 "f:podIPs": {
                                     ".": {},
-                                    "k:{\"ip\":\"100.96.6.13\"}": {
+                                    "k:{\"ip\":\"100.96.6.37\"}": {
                                         ".": {},
                                         "f:ip": {}
                                     }
@@ -1565,10 +1519,10 @@
                         },
                         "manager": "kubelet",
                         "operation": "Update",
-                        "time": "2022-05-16T15:58:06Z"
+                        "time": "2022-05-16T17:07:27Z"
                     }
                 ],
-                "name": "parsec-splash2x-fft-r67bx",
+                "name": "parsec-splash2x-fft-lmkpb",
                 "namespace": "default",
                 "ownerReferences": [
                     {
@@ -1577,12 +1531,12 @@
                         "controller": true,
                         "kind": "Job",
                         "name": "parsec-splash2x-fft",
-                        "uid": "2d4f1e29-371d-4197-9cdf-e4517117f1be"
+                        "uid": "95a16b51-0432-48b3-92ba-dde3e90cd8f6"
                     }
                 ],
-                "resourceVersion": "26216",
-                "selfLink": "/api/v1/namespaces/default/pods/parsec-splash2x-fft-r67bx",
-                "uid": "58d4f8d3-589d-491e-afca-cb2d8499a286"
+                "resourceVersion": "40469",
+                "selfLink": "/api/v1/namespaces/default/pods/parsec-splash2x-fft-lmkpb",
+                "uid": "cf815cb3-56d2-4e5e-96b4-fc64d6213052"
             },
             "spec": {
                 "containers": [
@@ -1658,35 +1612,35 @@
                 "conditions": [
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:05:43Z",
                         "reason": "PodCompleted",
                         "status": "True",
                         "type": "Initialized"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:58:06Z",
+                        "lastTransitionTime": "2022-05-16T17:07:27Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "Ready"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:58:06Z",
+                        "lastTransitionTime": "2022-05-16T17:07:27Z",
                         "reason": "PodCompleted",
                         "status": "False",
                         "type": "ContainersReady"
                     },
                     {
                         "lastProbeTime": null,
-                        "lastTransitionTime": "2022-05-16T15:56:12Z",
+                        "lastTransitionTime": "2022-05-16T17:05:43Z",
                         "status": "True",
                         "type": "PodScheduled"
                     }
                 ],
                 "containerStatuses": [
                     {
-                        "containerID": "docker://34f99d88d37e92d1d66a1a04b0a051603c723b693c8c0a3ed59feda640bdf595",
+                        "containerID": "docker://1e088206c31f3f67f22f1be07e845e1d6ac415e36785dfd4d63ecfa485fb64d2",
                         "image": "anakli/parsec:splash2x-fft-native-reduced",
                         "imageID": "docker-pullable://anakli/parsec@sha256:b8b60f8dcfd7e9947911aa134de0a909d33679130f0013bcb4fea2db113ef151",
                         "lastState": {},
@@ -1696,25 +1650,25 @@
                         "started": false,
                         "state": {
                             "terminated": {
-                                "containerID": "docker://34f99d88d37e92d1d66a1a04b0a051603c723b693c8c0a3ed59feda640bdf595",
+                                "containerID": "docker://1e088206c31f3f67f22f1be07e845e1d6ac415e36785dfd4d63ecfa485fb64d2",
                                 "exitCode": 0,
-                                "finishedAt": "2022-05-16T15:58:06Z",
+                                "finishedAt": "2022-05-16T17:07:26Z",
                                 "reason": "Completed",
-                                "startedAt": "2022-05-16T15:56:14Z"
+                                "startedAt": "2022-05-16T17:05:45Z"
                             }
                         }
                     }
                 ],
                 "hostIP": "10.156.15.225",
                 "phase": "Succeeded",
-                "podIP": "100.96.6.13",
+                "podIP": "100.96.6.37",
                 "podIPs": [
                     {
-                        "ip": "100.96.6.13"
+                        "ip": "100.96.6.37"
                     }
                 ],
                 "qosClass": "Burstable",
-                "startTime": "2022-05-16T15:56:12Z"
+                "startTime": "2022-05-16T17:05:43Z"
             }
         }
     ],
