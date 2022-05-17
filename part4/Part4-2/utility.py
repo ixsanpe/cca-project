@@ -4,6 +4,11 @@ Utility functions for dynamic parsec/memcached scheduler.
 import docker
 import subprocess
 import psutil
+from enum import Enum
+
+from config import *
+
+from datetime import datetime
 
 util_client = docker.from_env()
 
@@ -11,6 +16,20 @@ util_client = docker.from_env()
 class mc_state(Enum):
     SMALL = 0
     LARGE = 1
+
+
+'''
+Clean up all old parsec jobs
+'''
+
+def delete_jobs():
+    # Lazy strats for a lazy guy
+
+    # Stop all containers
+    subprocess.run("docker kill $(docker ps -q)".split(" "))
+
+    # Delete all containers
+    subprocess.run("docker container prune".split(" "))
 
 
 '''
@@ -26,12 +45,18 @@ container.pause
 container.unpause
 
 
+# containers have to be reloaded before their status is updated. 
+# If finished it should be 'exited'
+container.reload()
+container.status
+
+
 '''
 
 ################## PARSEC MANAGEMENT FUNCTIONS #######################
 
 
-def run_parsec_job(jobname, cpuset, n_threads):
+def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
     '''
     docker run --cpuset-cpus="0" -d --rm --name parsec \
     anakli/parsec:blackscholes-native-reduced \
@@ -41,10 +66,19 @@ def run_parsec_job(jobname, cpuset, n_threads):
     # Fun fact:
     If you use -d with --rm, the container is removed when it exits or when the daemon exits, whichever happens first.
     '''
+    # print('--------------' + 'Starting ' + jobname + '---------------')
 
-    img = 'anakli/parsec:' + jobname + '-native-reduced'
-
-    cmd = './bin/parsecmgmt -a run -p ' + jobname + ' -i native -n ' + str(n_threads)
+    if simlarge and jobname not in ['dedup', 'blackscholes']:
+        img = 'anakli/parsec:simlarge'
+        cmd = './bin/parsecmgmt -a run -p ' + jobname + ' -i simlarge -n ' + str(n_threads)
+        if jobname == 'splash2x-fft':
+            cmd = './bin/parsecmgmt -a run -p splash2x.fft -i simlarge -n ' + str(n_threads)
+        
+    else:
+        img = 'anakli/parsec:' + jobname + '-native-reduced'
+        cmd = './bin/parsecmgmt -a run -p ' + jobname + ' -i native -n ' + str(n_threads)
+        if jobname == 'splash2x-fft':
+            cmd = './bin/parsecmgmt -a run -p splash2x.fft -i native -n ' + str(n_threads)
 
     cont = util_client.containers.run(
         name = jobname,
@@ -52,10 +86,26 @@ def run_parsec_job(jobname, cpuset, n_threads):
         command = cmd,
         cpuset_cpus = cpuset, # In cpuset format 1-3 /// 1,4,
         detach=True
+        #auto_remove=True
     )
 
-    # Return container
+    # Log time
+    job_info[jobname]['start'] = datetime.now().strftime("%H:%M:%S")
+
+    # return container
     return cont
+
+
+def retire_job(job_container):
+
+        # Log end time 
+        job_info[job_container.name]['end'] = datetime.now().strftime("%H:%M:%S")
+
+        finished_jobs.append(job_container)
+        
+
+
+
 
 
 ################## MEMCACHED FSM FUNCTIONS #######################
@@ -63,10 +113,17 @@ def run_parsec_job(jobname, cpuset, n_threads):
 mcsmall_cores = '0'
 mclarge_cores = '0,1'
 
-def get_memcached_utilization(mc_state):
+def get_memcached_utilization(memcached_state):
     '''
     return sum of utilization of cores memecached is bound to
     '''
+
+    per_core_usage = psutil.cpu_percent(interval=1, percpu=True)
+
+    if memcached_state == mc_state.SMALL:
+        return per_core_usage[0]
+    else: #memcached_state is LARGE
+        return per_core_usage[0] + per_core_usage[1]
     
 
 
