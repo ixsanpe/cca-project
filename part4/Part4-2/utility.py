@@ -113,16 +113,16 @@ def retire_job(job_container):
 mcsmall_cores = '0'
 mclarge_cores = '0,1'
 
-def get_memcached_utilization(memcached_state):
+def get_memcached_utilization(curr_state):
     '''
     return sum of utilization of cores memecached is bound to
     '''
 
     per_core_usage = psutil.cpu_percent(interval=1, percpu=True)
 
-    if memcached_state == mc_state.SMALL:
+    if curr_state == mc_state.SMALL:
         return per_core_usage[0]
-    else: #memcached_state is LARGE
+    else: #curr_state is LARGE
         return per_core_usage[0] + per_core_usage[1]
     
 

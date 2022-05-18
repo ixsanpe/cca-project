@@ -4,20 +4,6 @@ import sys
 from enum import Enum
 
 
-USAGE = 'scheduler.py <memcached_process_id> \
-    Memcached PID must be the global pid from /var/memcached.pid not pid of individual thread'
-
-if len(sys.argv) != 2:
-    print(USAGE)
-    quit()
-else:
-    try:
-        memcached_pid = int(sys.argv[1])
-    except:
-        print('ERROR: MEMCACHED PID MUST BE AN INT!')
-        print(USAGE)
-        quit()
-
 
 '''
 Allocation:

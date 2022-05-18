@@ -8,6 +8,22 @@ from enum import Enum
 from utility import *
 
 
+USAGE = 'scheduler.py <memcached_process_id> \
+    Memcached PID must be the global pid from /var/memcached.pid not pid of individual thread'
+
+if len(sys.argv) != 2:
+    print(USAGE)
+    quit()
+else:
+    try:
+        memcached_pid = int(sys.argv[1])
+    except:
+        print('ERROR: MEMCACHED PID MUST BE AN INT!')
+        print(USAGE)
+        quit()
+
+
+
 #################################CODE##############################
 
 
@@ -34,18 +50,27 @@ print('Starting First Short Job in Small Block: ' + next_small_job)
 while True:
     time.sleep(interval)
 
-    ######## Update memcached resource allocation & Status ########
+    ######## Update memcached FSM ########
 
     # Get current stats for memcached.
-
+    current_util = get_memcached_utilization(memcached_state)
+    
     # If memcached in SMALL
-
+    if lock_large:
+        # Memcached in LARGE and no longer allowed to change
+        pass
+    elif memcached_state == mc_state.SMALL :
         # Does it need to go to LARGE
+        if current_util >= SL_threashold:
+            print('Updating memcached from SMALL to LARGE')
+            switch_SMALL_LARGE(memcached_pid)
 
-    # If memcached in LARGE
-
+    else: # memcached_state == mc_state.LARGE
         # Does it need to go to SMALL
-
+        if current_util <= LS_threashold:
+            print('Updating memcached from LARGE to SMALL')
+            switch_LARGE_SMALL(memcached_pid)
+   
 
     ######## Update large_core_block jobs #######
 
@@ -134,10 +159,7 @@ while True:
                 
                 # Switch state to large
                 if memcached_state == mc_state.SMALL:
-                    # TODO:TODO:TODO:TODO: Activate this when mc implemented
-                    pass
-                    # switch_SMALL_LARGE(memcached_pid)
-                # Set small block to empty
+                    switch_SMALL_LARGE(memcached_pid)
                 
                 # Set lock
                 lock_large = True
