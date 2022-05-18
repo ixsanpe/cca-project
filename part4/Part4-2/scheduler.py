@@ -108,12 +108,11 @@ while True:
 
     ######## Update small_core_block jobs #######
 
-    # Check if currently running
-    
-    # If everthing that can be ran in small block has been ran
-    if small_core_block_container == None:
+    # If small container ran out of tasks, it has been permanently assigned to memcahced so we can ignore it
+    if lock_large:
         continue
 
+    # Check if currently running
     small_core_block_container.reload()
     if small_core_block_container.status == 'exited':
 
@@ -133,32 +132,32 @@ while True:
                 # If no job in med queue give memcached all the core
                 print('    Giving Memcached all small core block resources')
                 
-                # Set lock
-                lock_large = True
                 # Switch state to large
                 if memcached_state == mc_state.SMALL:
                     # TODO:TODO:TODO:TODO: Activate this when mc implemented
                     pass
                     # switch_SMALL_LARGE(memcached_pid)
                 # Set small block to empty
+                
+                # Set lock
+                lock_large = True
                 small_core_block_container = None                
+
 
             else:
                 next_med_job = medium_tasks_queue.pop(0)
                 print('    Starting Next Medium job: ' + next_med_job)
-                large_core_block_container = run_parsec_job(next_med_job, large_core_block , thread_allocations[next_med_job])
-
-
+                small_core_block_container = run_parsec_job(next_med_job, large_core_block , thread_allocations[next_med_job])
         else:
             # then add job from small queue
             next_short_job = short_tasks_queue.pop(0)
             print('        Starting Next Short job: ' + next_short_job)
-            large_core_block_container = run_parsec_job(next_short_job, large_core_block , thread_allocations[next_short_job])                         
- 
+            small_core_block_container = run_parsec_job(next_short_job, large_core_block , thread_allocations[next_short_job])                         
 
     else:
         # print('Small core block busy')
         pass
+
 
 # Print diagnostic information about run
 
@@ -169,9 +168,9 @@ while True:
 for job in finished_jobs:
     # record remained of job info
     job_info[job.name]['status'] = job.status
-    job_info[job.name]['log'] = job.logs()[-log_tail_length]
+    job_info[job.name]['log'] = str(job.logs()[-log_tail_length:-1]).replace('\'', '') # [-log_tail_length]
 
-    print(job.logs()[-log_tail_length])
+    #print(job.logs()[-log_tail_length])
 
     print()
     print(job.name + ' -- Status: ' + job.status)
@@ -179,6 +178,7 @@ for job in finished_jobs:
 
 
 print('################## RESULTS ##################')
+print(job_info)
 print(json.dumps(job_info, sort_keys=True, indent=4))
 print('Results saved to: ' + results_file)
 print('#############################################')

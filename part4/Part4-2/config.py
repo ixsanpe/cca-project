@@ -46,7 +46,7 @@ thread_allocations = {
 # log (to check sucesfull completion)
 
 
-log_tail_length = 10 # In chars
+log_tail_length = 6 # In chars
 
 job_info = {
     'dedup': {
@@ -114,6 +114,18 @@ medium_tasks_queue = ['canneal','blackscholes']
 long_tasks_queue = ['freqmine','ferret']
 
 
+# Task Queues
+#short_tasks_queue = ['splash2x-fft']
+#medium_tasks_queue = []
+#long_tasks_queue = ['ferret', 'dedup']
+
+
+# Tessting TODO: remove this
+#short_tasks_queue = ['splash2x-fft']
+#medium_tasks_queue = []
+#long_tasks_queue = ['freqmine']
+
+
 # CPU Core Blocks ID's and Pointers to Currently Running Containers
 memcached_reserved_core = '0'
 memcached_container = None
@@ -149,14 +161,13 @@ class mc_state(Enum):
 # SL is less conservative, but the data we gathered makes it hard to pick a better one
 # TODO: If we are getting lots of violations, both these limits could be made more conservative
 
-SL_threashold = 50 # Trigger when state SMALL and single core utilization above 50%
-LS_threashold = 120 # Trigger when LARGE and two core utilization below 120%
+SL_threashold = 80 # Trigger when state SMALL and single core utilization above 50%
+LS_threashold = 130 # Trigger when LARGE and two core utilization below 120%
 
 memcached_state = mc_state.SMALL
 
 # If true, memcached will never go from LARGE to SMALL state
 lock_large = False
-
 
 
 # Scheduler interval
