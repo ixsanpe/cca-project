@@ -162,3 +162,7 @@ lock_large = False
 # Scheduler interval
 interval = 1.0
 finished_jobs = []
+
+
+# File path to store results of run
+results_file = "run_log.json"

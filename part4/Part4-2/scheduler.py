@@ -1,11 +1,12 @@
 import time
 import sys
 from utility import run_parsec_job, delete_jobs, switch_SMALL_LARGE, switch_LARGE_SMALL
-
+import json
 
 from enum import Enum
 
 from utility import *
+
 
 #################################CODE##############################
 
@@ -170,20 +171,20 @@ for job in finished_jobs:
     job_info[job.name]['status'] = job.status
     job_info[job.name]['log'] = job.logs()[-log_tail_length]
 
-    print('#############################################')
     print(job.logs()[-log_tail_length])
-    print('#############################################')
 
     print()
     print(job.name + ' -- Status: ' + job.status)
     
 
+
 print('################## RESULTS ##################')
-print(job_info)
+print(json.dumps(job_info, sort_keys=True, indent=4))
+print('Results saved to: ' + results_file)
 print('#############################################')
 
 
-
-
 # Save results
+with open(results_file,"w") as rf:
+    json.dump(job_info,rf)
 
