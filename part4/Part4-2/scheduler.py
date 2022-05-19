@@ -36,6 +36,11 @@ delete_jobs()
 # Record start time
 job_info['global']['start'] = datetime.timestamp(datetime.now())
 
+
+
+# A juicy alternative to reading the docker documentation
+sbc_paused = False
+
 # Run memcached
 
 # Set initial mc state
@@ -70,6 +75,14 @@ while True:
     elif memcached_state == mc_state.SMALL :
         # Does it need to go to LARGE
         if current_util >= SL_threashold:
+            
+            # Unpause the job
+            if small_core_block_container != None:
+                # Log the change
+                sbc_paused = False
+                job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
+                small_core_block_container.unpause()
+            
             print('Updating memcached from SMALL to LARGE')
             switch_SMALL_LARGE(memcached_pid)
             memcached_state = mc_state.LARGE
@@ -77,6 +90,13 @@ while True:
     else: # memcached_state == mc_state.LARGE
         # Does it need to go to SMALL
         if current_util <= LS_threashold:
+            # If job in small, pause job
+            if small_core_block_container != None:
+                # Log the change
+                sbc_paused = True
+                job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
+                small_core_block_container.pause()
+
             print('Updating memcached from LARGE to SMALL')
             switch_LARGE_SMALL(memcached_pid)
             memcached_state = mc_state.SMALL
@@ -109,6 +129,12 @@ while True:
                     # If no small job, try to move from small_block to large_block
                     if small_core_block_container != None:
                         print('            Moving Job From Small to Large Block')
+
+                        # If neccesary unpause 
+                        if sbc_paused:
+                            job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
+                            small_core_block_container.unpause()
+
                         # Move to other container
                         large_core_block_container = small_core_block_container
                         small_core_block_container = None
