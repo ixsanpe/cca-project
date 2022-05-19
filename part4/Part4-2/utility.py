@@ -100,7 +100,7 @@ def retire_job(job_container):
 
         # Log end time 
         job_info[job_container.name]['end'] = datetime.now().strftime("%H:%M:%S")
-        job_info[jobname]['timestamps'].append(datetime.timestamp(datetime.now()))
+        job_info[job_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
         finished_jobs.append(job_container)
         
 
