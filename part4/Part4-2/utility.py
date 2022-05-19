@@ -90,7 +90,7 @@ def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
     )
 
     # Log time
-    job_info[jobname]['start'] = datetime.now().strftime("%H:%M:%S")
+    job_info[jobname]['start'] =  datetime.timestamp(datetime.now())# Formerly string: datetime.now().strftime("%H:%M:%S")
 
     # return container
     return cont
@@ -99,19 +99,13 @@ def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
 def retire_job(job_container):
 
         # Log end time 
-        job_info[job_container.name]['end'] = datetime.now().strftime("%H:%M:%S")
+        job_info[job_container.name]['end'] = datetime.timestamp(datetime.now()) # Formerly: datetime.now().strftime("%H:%M:%S")
 
         finished_jobs.append(job_container)
         
 
 
-
-
-
 ################## MEMCACHED FSM FUNCTIONS #######################
-
-mcsmall_cores = '0'
-mclarge_cores = '0,1'
 
 def get_memcached_utilization(curr_state):
     '''
@@ -137,7 +131,7 @@ def switch_SMALL_LARGE(mc_pid):
 
     WARNING: Don't forget to switch memcached flag in main
     '''
-    cmd = 'taskset -a --pid --cpu-list 0,1 ' + str(mc_pid)
+    cmd = 'taskset -a --pid --cpu-list ' +  mclarge_cores + ' ' + str(mc_pid)
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
 
     # Instead of waiting for process to terminate, lets just do extensive unit testing to make sure it works :^^^^)
@@ -150,5 +144,5 @@ def switch_LARGE_SMALL(mc_pid):
 
     WARNING: Don't forget to switch memcached flag in main
     '''
-    cmd = 'taskset -a --pid --cpu-list 0,1 ' + str(mc_pid)
+    cmd = 'taskset -a --pid --cpu-list '+ mcsmall_cores + ' ' + str(mc_pid)
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)

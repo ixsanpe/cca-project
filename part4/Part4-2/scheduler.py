@@ -32,7 +32,15 @@ delete_jobs()
 
 # Initialize ---> Run memcached and initial jobs
 
+
+# Record start time
+job_info['global']['start'] = datetime.timestamp(datetime.now())
+
 # Run memcached
+
+# Set initial mc state
+print('Setting MC to initial state')
+switch_LARGE_SMALL(memcached_pid)
 
 # Start initial large_block job
 next_large_job = long_tasks_queue.pop(0)
@@ -64,12 +72,14 @@ while True:
         if current_util >= SL_threashold:
             print('Updating memcached from SMALL to LARGE')
             switch_SMALL_LARGE(memcached_pid)
+            memcached_state = mc_state.LARGE
 
     else: # memcached_state == mc_state.LARGE
         # Does it need to go to SMALL
         if current_util <= LS_threashold:
             print('Updating memcached from LARGE to SMALL')
             switch_LARGE_SMALL(memcached_pid)
+            memcached_state = mc_state.SMALL
    
 
     ######## Update large_core_block jobs #######
@@ -107,6 +117,10 @@ while True:
                         large_core_block_container.update(cpuset_cpus=large_core_block)
                     else:
                         large_core_block_container = None
+
+                        # Give memcached enough cores just in case TODO: Determine if this is really necessary
+                        switch_SMALL_LARGE(memcached_pid)
+
                         # If no, we're done!!!
                         print('No jobs in long, med, short quques/ Large, small core blocks!!!')
                         print('---All PARSEC JOBS COMPLETED---')
@@ -181,11 +195,12 @@ while True:
         pass
 
 
+# Record end time
+
+job_info['global']['end'] = datetime.timestamp(datetime.now())
+
+
 # Print diagnostic information about run
-
-
-
-
 
 for job in finished_jobs:
     # record remained of job info

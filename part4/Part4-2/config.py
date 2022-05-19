@@ -35,6 +35,12 @@ thread_allocations = {
 log_tail_length = 6 # In chars
 
 job_info = {
+    'global' : {
+        'start' : None,
+        'stop' : None,
+        'end' : 'Not Available',
+        'log' : 'Not Available'
+    },
     'dedup': {
         'start' : None,
         'end' : None,
@@ -100,16 +106,7 @@ medium_tasks_queue = ['canneal','blackscholes']
 long_tasks_queue = ['freqmine','ferret']
 
 
-# Task Queues
-#short_tasks_queue = ['splash2x-fft']
-#medium_tasks_queue = []
-#long_tasks_queue = ['ferret', 'dedup']
-
-
-# Tessting TODO: remove this
-#short_tasks_queue = ['splash2x-fft']
-#medium_tasks_queue = []
-#long_tasks_queue = ['freqmine']
+# Might want to change above to smaller set for testing purposes
 
 
 # CPU Core Blocks ID's and Pointers to Currently Running Containers
@@ -136,8 +133,6 @@ LARGE --> SMALL:
 
 '''
 
-# Memcached state TODO: What should its starts state be?
-
 class mc_state(Enum):
     SMALL = 0
     LARGE = 1
@@ -163,3 +158,8 @@ finished_jobs = []
 
 # File path to store results of run
 results_file = "run_log.json"
+
+
+mcsmall_cores = '0'
+mclarge_cores = '0,1'
+
