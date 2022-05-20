@@ -90,17 +90,16 @@ def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
     )
 
     # Log time
-    job_info[jobname]['start'] =  datetime.timestamp(datetime.now())# Formerly string: datetime.now().strftime("%H:%M:%S")
-
+    job_info[jobname]['start'] = datetime.now().strftime("%H:%M:%S")
+    job_info[jobname]['timestamps'].append(datetime.timestamp(datetime.now()))
     # return container
     return cont
 
 
 def retire_job(job_container):
-
         # Log end time 
-        job_info[job_container.name]['end'] = datetime.timestamp(datetime.now()) # Formerly: datetime.now().strftime("%H:%M:%S")
-
+        job_info[job_container.name]['end'] = datetime.now().strftime("%H:%M:%S")
+        job_info[job_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
         finished_jobs.append(job_container)
         
 

@@ -36,42 +36,49 @@ log_tail_length = 6 # In chars
 
 job_info = {
     'global' : {
+        'timestamps' : 'Not Available',
         'start' : None,
         'stop' : None,
         'end' : 'Not Available',
         'log' : 'Not Available'
     },
     'dedup': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
         'log' : None
     },
     'blackscholes': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
         'log' : None
     },
     'ferret': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
         'log' : None
     },
     'freqmine': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
         'log' : None
     },
     'canneal': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
         'log' : None
     },
     'splash2x-fft': {
+        'timestamps' : [],
         'start' : None,
         'end' : None,
         'status' : None,
@@ -120,6 +127,9 @@ large_core_block = '2,3'
 large_core_block_container = None
 
 
+mcsmall_cores = '0'
+mclarge_cores = '0,1'
+
 
 '''
 Memcached State:
@@ -160,6 +170,4 @@ finished_jobs = []
 results_file = "run_log.json"
 
 
-mcsmall_cores = '0'
-mclarge_cores = '0,1'
 
