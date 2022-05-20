@@ -56,7 +56,7 @@ container.status
 ################## PARSEC MANAGEMENT FUNCTIONS #######################
 
 
-def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
+def run_parsec_job(jobname, cpuset, n_threads, simlarge=False):
     '''
     docker run --cpuset-cpus="0" -d --rm --name parsec \
     anakli/parsec:blackscholes-native-reduced \

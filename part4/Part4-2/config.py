@@ -152,7 +152,7 @@ class mc_state(Enum):
 # SL is less conservative, but the data we gathered makes it hard to pick a better one
 # TODO: If we are getting lots of violations, both these limits could be made more conservative
 
-SL_threashold = 80 # Trigger when state SMALL and single core utilization above 50%
+SL_threashold = 60 # Trigger when state SMALL and single core utilization above 50%
 LS_threashold = 130 # Trigger when LARGE and two core utilization below 120%
 
 memcached_state = mc_state.SMALL
