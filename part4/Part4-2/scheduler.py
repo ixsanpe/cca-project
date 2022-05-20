@@ -74,14 +74,24 @@ while True:
         pass
     elif memcached_state == mc_state.SMALL :
         # Does it need to go to LARGE
+        small_core_block_container.reload()
+        if small_core_block_container.status == 'paused':
+            try:
+                small_core_block_container.unpause()
+            except:
+                pass
         if current_util >= SL_threashold:
             
             # Unpause the job
-            if small_core_block_container != None:
-                # Log the change
+            small_core_block_container.reload()
+            if small_core_block_container != None and small_core_block_container.status == 'paused':
+                # Log the changes
                 sbc_paused = False
                 job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
-                small_core_block_container.unpause()
+                try:
+                    small_core_block_container.unpause()
+                except:
+                    pass
             
             print('Updating memcached from SMALL to LARGE')
             switch_SMALL_LARGE(memcached_pid)
@@ -96,7 +106,10 @@ while True:
                 # Log the change
                 sbc_paused = True
                 job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
-                small_core_block_container.pause()
+                try:
+                    small_core_block_container.pause()
+                except:
+                    pass
 
             print('Updating memcached from LARGE to SMALL')
             switch_LARGE_SMALL(memcached_pid)
@@ -134,7 +147,10 @@ while True:
                         # If neccesary unpause 
                         if sbc_paused:
                             job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
-                            small_core_block_container.unpause()
+                            try:
+                                small_core_block_container.unpause()
+                            except:
+                                pass
                             sbc_paused = False
 
                         # Short no longer doing stuff
