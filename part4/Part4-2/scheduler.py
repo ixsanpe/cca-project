@@ -44,7 +44,7 @@ sbc_paused = False
 # Run memcached
 
 # Set initial mc state
-print('Setting MC to initial state')
+print('Setting MC to Initial State')
 switch_LARGE_SMALL(memcached_pid)
 
 # Start initial large_block job
@@ -91,7 +91,8 @@ while True:
         # Does it need to go to SMALL
         if current_util <= LS_threashold:
             # If job in small, pause job
-            if small_core_block_container != None:
+            large_core_block_container.reload()
+            if small_core_block_container != None and small_core_block_container.status != 'exited':
                 # Log the change
                 sbc_paused = True
                 job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
@@ -134,10 +135,12 @@ while True:
                         if sbc_paused:
                             job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
                             small_core_block_container.unpause()
+                            sbc_paused = False
 
                         # Short no longer doing stuff
                         lock_large = True
                         if memcached_state == mc_state.SMALL:
+                            print('Permanently Switching to Large')
                             switch_SMALL_LARGE(memcached_pid)
 
 
