@@ -97,7 +97,6 @@ def run_parsec_job(jobname, cpuset, n_threads, simlarge=True):
 
 
 def retire_job(job_container):
-
         # Log end time 
         job_info[job_container.name]['end'] = datetime.now().strftime("%H:%M:%S")
         job_info[job_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))

@@ -135,6 +135,12 @@ while True:
                             job_info[small_core_block_container.name]['timestamps'].append(datetime.timestamp(datetime.now()))
                             small_core_block_container.unpause()
 
+                        # Short no longer doing stuff
+                        lock_large = True
+                        if memcached_state == mc_state.SMALL:
+                            switch_SMALL_LARGE(memcached_pid)
+
+
                         # Move to other container
                         large_core_block_container = small_core_block_container
                         small_core_block_container = None
