@@ -13,10 +13,10 @@ $ bash scripts/deployP4.sh
 $ mem=`kubectl get nodes | grep memcache-server | awk '{print $1}'`
 $ gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$mem --zone europe-west3-a
 
-$ sudo apt update
-$ sudo apt install -y memcached libmemcached-tools
-$ sudo systemctl status memcached
-$ sudo vim /etc/memcached.conf
+sudo apt update
+sudo apt install -y memcached libmemcached-tools
+sudo systemctl status memcached
+sudo vim /etc/memcached.conf
 
 -> /-m -> i -> *change value=1024* -> ESC -> :wq!
 -> Now change the memory limit: 
@@ -42,9 +42,16 @@ $ bash scripts/install_mcperf_a_m.sh
 ## 4. INSTALL PYTHON3 in memcached
 
 # COPY 3 files .py in memcache server
-$ wget --output-document scheduler.py https://raw.githubusercontent.com/ixsanpe/cca-project/master/part4/Part4-2/config.py?token=GHSAT0AAAAAABUX24Y3GHMELYAZPREFQ3I2YUGNGIQ
-$ wget --output-document utility.py {{https://example.com/foo}}
-$ wget --output-document config.py {{https://example.com/foo}}
+	$ wget --output-document scheduler.py https://raw.githubusercontent.com/ixsanpe/cca-project/master/part4/Part4-2/scheduler.py?	token=GHSAT0AAAAAABUX24Y3GEUGRZRLJHUDSDVOYUHRXGQ
+	$ wget --output-document utility.py https://raw.githubusercontent.com/ixsanpe/cca-project/master/part4/Part4-2/utility.py?	token=GHSAT0AAAAAABUX24Y3QSHA2CJJVCOJAURSYUHRZIA
+	$ wget --output-document config.py https://raw.githubusercontent.com/ixsanpe/cca-project/master/part4/Part4-2/config.py?	token=GHSAT0AAAAAABUX24Y3556EUCI74UYAWW4CYUHRZTA
+
+# GET UPDATE memcached name down
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/scheduler.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
+
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/config.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
+
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/utility.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
 
 $ sudo apt install python3-pip
 $ pip3 install docker
@@ -55,7 +62,7 @@ $ cat /var/run/memcached/memcached.pid
 # change dataset size -> utility.py -> def run_parsec_job(jobname, cpuset, n_threads, simlarge=True) -> simlarge=False (THIS IS THE BIG ONE)
 
 $ sudo python3 scheduler.py PID NUMBER
-$ sudo taskset -c 3 python3 scheduler.py 11789
+$ sudo taskset -c 2,3 python3 scheduler.py 11789
 
 
 ## 5. NEW SCRIPT: Connect to client-agent VM
@@ -86,7 +93,7 @@ $ ip_a=XXXXXXXXX
 $ ip_mem=XXXXXXXX
 
 ---> NOT NECESSARY
-$ cd memcache-perf-dynamic
+$ cd memcachels-perf-dynamic
 $ ./mcperf -s $ip_mem --loadonly
 $ ./mcperf -s $ip_mem -a $ip_a --noload -T 16 -C 4 -D 4 -Q 1000 -c 4 -t 1800 --qps_interval 10 --qps_min 5000 --qps_max 100000
 
@@ -108,7 +115,7 @@ $ ./mcperf -s $ip_mem -a $ip_a --noload -T 16 -C 4 -D 4 -Q 1000 -c 4 -t 1800 --q
 
 ######## COPY FILE FROM VM TO LOCAL:
 
-gcloud compute scp --recurse ubuntu@memcache-server-73fz:/home/ubuntu/run_log.json '/mnt/c/Users/ixsan' --zone europe-west3-a
+gcloud compute scp --recurse ubuntu@memcache-server-rq4t:/home/ubuntu/run_log.json '/mnt/c/Users/ixsan' --zone europe-west3-a
 
 #################### PART 4.4.1
 
@@ -141,17 +148,27 @@ $ ./mcperf -s $ip_mem -a $ip_a --noload -T 16 -C 4 -D 4 -Q 1000 -c 4 -t 1800 --q
 #####################
 delete docker containers:
 
+# list all containers:
+$ docker ps -a #list all containers stopped and non stopped
+
+# STOP CONTAINERS:
+
+$ docker stop $(docker ps -a -q)
 $ docker kill $(docker ps -q)
 
+## STOP IMAGES AND CONTAINERS NOT RUNNING ANYMORE
 $ sudo chmod 666 /var/run/docker.sock
 $ docker container prune
 $ docker rm -f $(docker ps -a -q) #(delete all)
+$ docker stop $(docker ps -a -q)
 
+$ docker image prune
 
 ############## delete project:
 
-$ export KOPS_STATE_STORE=gs://cca-eth-2022-group-25-2-isanchez/
-$ export KOPS_FEATURE_FLAGS=AlphaAllowGCE
-$ PROJECT=cca-eth-2022-group-25-2
-$ kops delete cluster part4.k8s.local --yes
-$ gsutil rm -r gs://cca-eth-2022-group-25-2-isanchez/
+export KOPS_STATE_STORE=gs://cca-eth-2022-group-25-2-isanchez/
+export KOPS_FEATURE_FLAGS=AlphaAllowGCE
+PROJECT=cca-eth-2022-group-25-2
+kops delete cluster part4.k8s.local --yes
+gsutil rm -r gs://cca-eth-2022-group-25-2-isanchez/
+gsutil mb gs://cca-eth-2022-group-25-2-isanchez/

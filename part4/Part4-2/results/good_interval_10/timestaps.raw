@@ -1,0 +1,14 @@
+
+Total QPS = 54259.7 (97667504 / 1800.0s)
+
+Total connections = 64
+Misses = 0 (0.0%)
+Skipped TXs = 0 (0.0%)
+
+RX 24123873735 bytes :   12.8 MB/s
+TX          0 bytes :    0.0 MB/s
+Warning! Detected max cpu usage > 95%
+CPU Usage Stats (avg/min/max): 99.96%,48.99%,100.00%
+
+Timestamp start: 1653066338361
+Timestamp end: 1653068138802

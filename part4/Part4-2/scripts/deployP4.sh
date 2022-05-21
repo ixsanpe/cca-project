@@ -11,11 +11,11 @@ PROJECT=cca-eth-2022-group-25-2
 kops create -f part4.yaml
 kops update cluster part4.k8s.local --yes --admin
 kops validate cluster --wait 10m
-kubectl get nodes -o wide
+kubectl get nodes -o wide\
 
 
 # Install memcached on memcache-server VM
 
-mem=`kubectl get nodes | grep memcache-server | awk '{print $1}'`
+#mem=`kubectl get nodes | grep memcache-server | awk '{print $1}'`
 
-bash scripts/commands_ssh.sh $mem < scripts/install_memcached.sh
+#bash scripts/commands_ssh.sh $mem < scripts/inrstall_memcached.sh
