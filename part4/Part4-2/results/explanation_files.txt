@@ -11,5 +11,12 @@
 					
 - run_logX: start and end timestamps of each job + timestamps for pausing/unpausing
 					Important information: for doing the plots
+
+
+## Explanation of folders:
+
+- good_interval_10: data for plots 4.3
+- good_interval_5: data for computing SLO
+- good_interval_X: data for plots 4.4 with new qps_interval
 					
 					

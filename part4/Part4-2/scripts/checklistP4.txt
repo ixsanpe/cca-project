@@ -62,7 +62,7 @@ $ cat /var/run/memcached/memcached.pid
 # change dataset size -> utility.py -> def run_parsec_job(jobname, cpuset, n_threads, simlarge=True) -> simlarge=False (THIS IS THE BIG ONE)
 
 $ sudo python3 scheduler.py PID NUMBER
-$ sudo taskset -c 2,3 python3 scheduler.py 11789
+$ sudo taskset -c 2,3 python3 scheduler.py 10580
 
 
 ## 5. NEW SCRIPT: Connect to client-agent VM
@@ -115,7 +115,7 @@ $ ./mcperf -s $ip_mem -a $ip_a --noload -T 16 -C 4 -D 4 -Q 1000 -c 4 -t 1800 --q
 
 ######## COPY FILE FROM VM TO LOCAL:
 
-gcloud compute scp --recurse ubuntu@memcache-server-rq4t:/home/ubuntu/run_log.json '/mnt/c/Users/ixsan' --zone europe-west3-a
+gcloud compute scp --recurse ubuntu@memcache-server-ctcl:/home/ubuntu/run_log.json '/mnt/c/Users/ixsan' --zone europe-west3-a
 
 #################### PART 4.4.1
 
