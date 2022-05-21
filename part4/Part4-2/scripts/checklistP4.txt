@@ -47,11 +47,11 @@ $ bash scripts/install_mcperf_a_m.sh
 	$ wget --output-document config.py https://raw.githubusercontent.com/ixsanpe/cca-project/master/part4/Part4-2/config.py?	token=GHSAT0AAAAAABUX24Y3556EUCI74UYAWW4CYUHRZTA
 
 # GET UPDATE memcached name down
-gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/scheduler.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/scheduler.py' ubuntu@memcache-server-ctcl:/home/ubuntu/  --zone europe-west3-a
 
-gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/config.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/config.py' ubuntu@memcache-server-ctcl:/home/ubuntu/  --zone europe-west3-a
 
-gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/utility.py' ubuntu@memcache-server-rq4t:/home/ubuntu/  --zone europe-west3-a
+gcloud compute scp --recurse '/mnt/c/Users/ixsan/Documents/ETH/0Courses ETH/SS2022/CloudComputing/measures/part4/Part4-2/utility.py' ubuntu@memcache-server-ctcl:/home/ubuntu/  --zone europe-west3-a
 
 $ sudo apt install python3-pip
 $ pip3 install docker

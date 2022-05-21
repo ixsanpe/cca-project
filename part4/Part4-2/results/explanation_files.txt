@@ -1,0 +1,15 @@
+## Explanation of files:
+ 
+- output_memcachedX: Total output of the command window for memcached
+					Important information: timestamps start/finish
+
+- output_schedulerX: Output of scheduler.py of command window
+					Important information: it helps to understand what the app was doing
+
+- qps_X: qps of memcached (just the table, easier to deal with the data for plots)
+					Important information: compute SLO and plots of y-axis qps
+					
+- run_logX: start and end timestamps of each job + timestamps for pausing/unpausing
+					Important information: for doing the plots
+					
+					
