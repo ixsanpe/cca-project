@@ -15,7 +15,7 @@ spec:
             cpu: "6.0"
         imagePullPolicy: Always
         command: ["/bin/sh"]
-        args: ["-c", "taskset -c 0-5 ./bin/parsecmgmt -a run -p freqmine -i native -n 6"]
+        args: ["-c", "taskset -c 0-6 ./bin/parsecmgmt -a run -p freqmine -i native -n 6"]
       restartPolicy: Never
       nodeSelector:
         cca-project-nodetype: "node-c-8core"
