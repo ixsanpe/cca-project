@@ -1,21 +1,25 @@
 #! /bin/bash
 
-# Delete previous jobs:
+# In this script we run the static scheduler for part 3.
+# The separation of jobs is as follows:
+	# 4-core VM: ferret and dedup
+	# 8-core VM: freqmine, blackscholes, fft and canneal
+	
+# The proposed scheduling scheme has four jobs dependencies:
+	# 1- dedup after ferret in 4-core VM
+	# 2- blackscholes after freqmine in 8-core VM (simultaneously with fft)
+	# 3- fft after freqmine in 8-core VM (simultaneously with blackscholes)
+	# 4- canneal after blackscholes and consequently freqmine in 8-core VM
+
+# Delete previous jobs and pods:
 kubectl delete jobs --field-selector status.successful=1
 kubectl delete jobs --field-selector status.successful=0
-sleep 5
 kubectl delete pods --all
-# Our proposed scheduling scheme has three job dependencies
-# 4-core-high-mem:
-#   Ferret ---> Dedup 
-# 8-core-normal:
-#   Freqmine ---> BlackScholes & FFT
-#   BlackScholes ---> Canneal
 
-# Run initial jobs: Ferret, FFT, Freqmine
+# Run initial jobs: Ferret, Freqmine
 kubectl create -f parsec-freqmine.yaml
 kubectl create -f parsec-ferret.yaml
-#kubectl create -f parsec-fft.yaml
+
 echo 'created freqmine and ferret'
 
 
@@ -23,7 +27,6 @@ echo 'created freqmine and ferret'
 while true
 do
     # For each dependency check if job completed
-
     # Record job status
     kubectl get jobs -o wide > temporary_file.raw
     ferret=`kubectl get jobs -o wide | grep parsec-ferret | awk '{print $2}'`
@@ -41,22 +44,22 @@ do
         kubectl create -f parsec-dedup.yaml
         echo 'create dedup'
     fi
-    # Check for FFT ---> BlackScholes	#if [ "$freqmine" == "$complete" ] && [ "$fft" == "$complete" ]; then
+    # Check for Freqmine ---> BlackScholes	& FFT
     if [ "$freqmine" == "$complete" ]; then
         kubectl create -f parsec-blackscholes.yaml
 		kubectl create -f parsec-fft.yaml
         echo 'create blackscholes and fft'
     fi
-    # Check for Freqmine ---> Canneal
+    # Check for Freqmine & Blackscholes ---> Canneal
     if [ "$freqmine" == "$complete" ] && [ "$blackscholes" == "$complete" ]; then
         kubectl create -f parsec-canneal.yaml
         echo 'create canneal'
     fi
-
+	# Check for end of all jobs to deploy results 
     if [ "$ferret" == "$complete" ] && [ "$freqmine" == "$complete" ] && [ "$fft"=="$complete" ] && [ "$canneal"=="$complete" ] && [ "$dedup"=="$complete" ] && [ "$blackscholes"=="$complete" ]; then
-	kubectl get pods -o json > results1.json
-	python3 get_time.py results1.json
-	break
+		kubectl get pods -o json > results.json
+		python3 get_time.py results1.json
+		break
     fi
 
     sleep 1
