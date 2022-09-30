@@ -26,13 +26,6 @@ gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-measure-8
 gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-a-n13t --zone europe-west3-a
 gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-agent-b-45gl --zone europe-west3-a <C:\Users\ixsan\Documents\ETH\0Courses ETH\SS2022\CloudComputing\measures\part3\scripts\install_mcperf.sh
 
----------------- NO WORK
-	scripts/connect.sh client-measure-8x8s
- 	<install_scripts/mcperf.sh
-	set $1=client-measure-x1xw
-	gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$1 --zone europe-west3-a
----------------------
-
 
 # 3. Install load generator in client measure, client agent a and client agent b: 
 

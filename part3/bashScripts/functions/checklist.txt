@@ -86,7 +86,7 @@ python3 scheduler.py
 # (...)
 #check:
 
-kubectl get pods -o json > resultsIxe.json
-python3 get_time.py resultsIxe.json
+kubectl get pods -o json > results.json
+python3 get_time.py results.json
 
 
