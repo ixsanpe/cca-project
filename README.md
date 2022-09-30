@@ -1,4 +1,4 @@
-# Cloud Computing Architecture project Spring Semester 2022 @ ETH Zürich
+# Cloud Computing Architecture project @ ETH Zürich Spring Semester 2022  
 This repository icnludes the code, results and reports for Cloud Computing Architecture course project at ETH Zürich. \
 The objective of the project is to schedule latency-sensitive and batch applications in a cloud cluster. It consists of four parts: 
  * **Part 1:** Run a latency-critical application (memcached) inside a container and measure its performance with the metric of tail latency (e.g., 95th percentile latency)
